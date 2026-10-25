@@ -1,0 +1,6 @@
+.DS_Store
+*.app/
+*.zip
+.build/
+DerivedData/
+release-assets/
