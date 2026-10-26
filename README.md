@@ -16,9 +16,12 @@
 
 ## 下载安装
 
-1. 前往 [Releases](https://github.com/mossbyte888/screenshot-helper/releases/latest)，下载 `ScreenshotHelper-1.0.2-macOS-arm64.zip`。
-2. 解压，将 **截图助手.app** 拖入“应用程序”文件夹，再双击打开。
-3. 首次截图时，在“系统设置 → 隐私与安全性 → 屏幕与系统音频录制”（部分系统显示为“屏幕录制”）中允许“截图助手”，必要时退出并重新打开。
+1. 前往 [Releases](https://github.com/mossbyte888/screenshot-helper/releases/latest)，下载 `ScreenshotHelper-1.0.2-macOS-arm64.dmg`。
+2. 双击打开 DMG，将 **截图助手.app** 拖到窗口中的 **Applications（应用程序）** 文件夹快捷方式。
+3. 复制完成后推出“截图助手”磁盘，从 Mac 的“应用程序”文件夹打开软件。
+4. 首次截图时，在“系统设置 → 隐私与安全性 → 屏幕与系统音频录制”（部分系统显示为“屏幕录制”）中允许“截图助手”，必要时退出并重新打开。
+
+DMG 内附 MIT 许可证与安装说明。也可下载备用的 `ScreenshotHelper-1.0.2-macOS-arm64.zip`，解压后将应用拖入“应用程序”文件夹。
 
 当前发布包使用本地临时签名，尚未进行 Apple Developer ID 签名或公证，macOS 可能阻止直接打开。确认下载来自本仓库后，可在“系统设置 → 隐私与安全性”中查看系统提供的“仍要打开”选项；也可以按下文自行编译。无需关闭系统安全保护。
 
@@ -58,12 +61,21 @@ open 截图助手.app
 
 构建会在项目目录生成 `截图助手.app` 和 `截图助手.zip`。无需第三方 Swift 依赖。脚本对部分开发工具升级后遗留的重复 SwiftBridging 声明采用临时编译器文件视图，不修改系统工具文件。
 
+已有 `截图助手.app` 后，可进一步生成 DMG 安装包：
+
+```bash
+bash build-dmg.sh
+```
+
+输出为 `release-assets/ScreenshotHelper-1.0.2-macOS-arm64.dmg`，包含应用、“应用程序”文件夹快捷方式、MIT 许可证和安装说明。脚本同时生成同名的 `.dmg.sha256.txt` 校验文件；ZIP 的 `SHA256SUMS.txt` 保持独立。
+
 | 文件 | 用途 |
 | --- | --- |
 | `main.swift` | 应用完整源码 |
 | `Info.plist` | 应用信息与版本 |
 | `AppIcon.icns` | 应用图标 |
-| `build.sh` | 编译、签名与打包 |
+| `build.sh` | 编译、签名并生成应用和 ZIP |
+| `build-dmg.sh` | 将已有应用打包为 DMG |
 | `CHANGELOG.md` | 更新记录 |
 
 ## 许可证
